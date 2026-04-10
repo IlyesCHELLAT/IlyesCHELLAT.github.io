@@ -1,218 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Ilyes CHELLAT — Cybersecurity & Digital Creative</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ilyes CHELLAT — Cybersecurity & Digital Creative</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-<style>
-  /* ── RESET & BASE ── */
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg:       #080c10;
-    --bg2:      #0d1117;
-    --bg3:      #111820;
-    --cyan:     #00e5ff;
-    --amber:    #ffb300;
-    --green:    #39ff14;
-    --text:     #c9d1d9;
-    --muted:    #586069;
-    --border:   #1f2937;
-    --mono:     'Share Tech Mono', monospace;
-    --display:  'Playfair Display', serif;
-    --body:     'Outfit', sans-serif;
-    --glow-c:   0 0 8px #00e5ff88, 0 0 24px #00e5ff33;
-    --glow-a:   0 0 8px #ffb30088, 0 0 24px #ffb30033;
-  }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--body);
-    font-weight: 300;
-    line-height: 1.8; /* Increased line height */
-    overflow-x: hidden;
-    cursor: none;
-    font-size: 1.1rem; /* Overall base font size increased */
-  }
+    <style>
+        /* ── RESET & BASE ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg:       #080c10;
+            --bg2:      #0d1117;
+            --bg3:      #111820;
+            --cyan:     #00e5ff;
+            --amber:    #ffb300;
+            --green:    #39ff14;
+            --text:     #c9d1d9;
+            --muted:    #586069;
+            --border:   #1f2937;
+            --mono:     'Share Tech Mono', monospace;
+            --display:  'Playfair Display', serif;
+            --body:     'Outfit', sans-serif;
+            --glow-c:   0 0 8px #00e5ff88, 0 0 24px #00e5ff33;
+            --glow-a:   0 0 8px #ffb30088, 0 0 24px #ffb30033;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--body);
+            font-weight: 300;
+            line-height: 1.8;
+            overflow-x: hidden;
+            font-size: 1.2rem; /* زيادة حجم الخط الأساسي */
+        }
 
-  /* ── CUSTOM CURSOR ── */
-  #cursor {
-    position: fixed; top: 0; left: 0; z-index: 9999;
-    width: 12px; height: 12px;
-    background: var(--cyan);
-    border-radius: 50%;
-    pointer-events: none;
-    transform: translate(-50%,-50%);
-    transition: transform .1s, background .2s;
-    box-shadow: var(--glow-c);
-  }
-  #cursor-ring {
-    position: fixed; top: 0; left: 0; z-index: 9998;
-    width: 36px; height: 36px;
-    border: 1px solid var(--cyan);
-    border-radius: 50%;
-    pointer-events: none;
-    transform: translate(-50%,-50%);
-    transition: transform .15s ease-out, width .2s, height .2s;
-    opacity: .5;
-  }
+        /* ── CUSTOM CURSOR ── */
+        #cursor {
+            position: fixed; top: 0; left: 0; z-index: 9999;
+            width: 12px; height: 12px;
+            background: var(--cyan);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%,-50%);
+            transition: transform .1s, background .2s;
+            box-shadow: var(--glow-c);
+        }
+        #cursor-ring {
+            position: fixed; top: 0; left: 0; z-index: 9998;
+            width: 36px; height: 36px;
+            border: 1px solid var(--cyan);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%,-50%);
+            transition: transform .15s ease-out, width .2s, height .2s;
+            opacity: .5;
+        }
 
-  /* ── MATRIX CANVAS ── */
-  #matrix-canvas {
-    position: fixed; top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 0; opacity: .035;
-    pointer-events: none;
-  }
+        /* ── MATRIX CANVAS ── */
+        #matrix-canvas {
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0; opacity: .035;
+            pointer-events: none;
+        }
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; width: 100%; z-index: 100;
-    background: rgba(8,12,16,.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.1rem 2.5rem;
-  }
-  .nav-logo {
-    font-family: var(--mono);
-    color: var(--cyan);
-    font-size: 1.1rem;
-    text-shadow: var(--glow-c);
-    letter-spacing: .05em;
-  }
-  .nav-logo span { color: var(--amber); }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a {
-    font-family: var(--mono);
-    font-size: 0.9rem;
-    color: var(--muted);
-    text-decoration: none;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    transition: color .2s, text-shadow .2s;
-  }
-  .nav-links a:hover { color: var(--cyan); text-shadow: var(--glow-c); }
+        /* ── NAV ── */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            background: rgba(8,12,16,.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1.2rem 2.5rem;
+        }
+        .nav-logo {
+            font-family: var(--mono);
+            color: var(--cyan);
+            font-size: 1.3rem; /* تكبير اللوغو */
+            text-shadow: var(--glow-c);
+            letter-spacing: .05em;
+        }
+        .nav-logo span { color: var(--amber); }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a {
+            font-family: var(--mono);
+            font-size: 1rem; /* تكبير روابط النافبار */
+            color: var(--muted);
+            text-decoration: none;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            transition: color .2s, text-shadow .2s;
+        }
+        .nav-links a:hover { color: var(--cyan); text-shadow: var(--glow-c); }
 
-  /* ── WRAPPER ── */
-  .wrapper { position: relative; z-index: 2; }
+        /* ── WRAPPER ── */
+        .wrapper { position: relative; z-index: 2; }
 
-  /* ── HERO ── */
-  #hero {
-    min-height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-    padding: 7rem 2rem 4rem;
-    position: relative;
-  }
-  .hero-inner {
-    display: grid;
-    grid-template-columns: 1fr 360px;
-    gap: 5rem;
-    align-items: center;
-    max-width: 1200px;
-    width: 100%;
-  }
-  .hero-pre {
-    font-family: var(--mono);
-    color: var(--cyan);
-    font-size: 0.95rem;
-    letter-spacing: .25em;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-    text-shadow: var(--glow-c);
-  }
-  .hero-name {
-    font-family: var(--display);
-    font-size: clamp(3.2rem, 7vw, 5.5rem);
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.1;
-    margin-bottom: 0.8rem;
-  }
-  .hero-name em { font-style: italic; color: var(--amber); text-shadow: var(--glow-a); }
-  .hero-tagline {
-    font-family: var(--mono);
-    font-size: 1.15rem;
-    color: var(--muted);
-    margin-bottom: 2rem;
-    border-left: 3px solid var(--cyan);
-    padding-left: 1.2rem;
-  }
-  #typed-text {
-    font-family: var(--mono);
-    font-size: 1rem;
-    color: var(--green);
-    background: rgba(0,255,0,.05);
-    border: 1px solid rgba(57,255,20,.2);
-    border-radius: 6px;
-    padding: 1.2rem 1.5rem;
-    min-height: 3.5rem;
-    margin-bottom: 2.5rem;
-  }
-  .btn {
-    font-family: var(--mono);
-    font-size: 0.9rem;
-    padding: 0.9rem 2rem;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: all .25s;
-    cursor: none;
-  }
-  .btn-primary { background: var(--cyan); color: #000; font-weight: 600; box-shadow: var(--glow-c); }
-  .btn-outline { border: 1px solid var(--amber); color: var(--amber); }
+        /* ── HERO ── */
+        #hero {
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+        }
+        .hero-inner {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 5rem;
+            align-items: center;
+            max-width: 1200px;
+            width: 100%;
+        }
+        .hero-pre {
+            font-family: var(--mono);
+            color: var(--cyan);
+            font-size: 1.1rem; /* تكبير النص التمهيدي */
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            text-shadow: var(--glow-c);
+        }
+        .hero-name {
+            font-family: var(--display);
+            font-size: clamp(3.5rem, 8vw, 6rem); /* تكبير الاسم */
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .hero-name em { font-style: italic; color: var(--amber); text-shadow: var(--glow-a); }
+        .hero-tagline {
+            font-family: var(--mono);
+            font-size: 1.3rem; /* تكبير الوصف */
+            color: var(--muted);
+            margin-bottom: 2.5rem;
+            border-left: 3px solid var(--cyan);
+            padding-left: 1.5rem;
+        }
+        #typed-text {
+            font-family: var(--mono);
+            font-size: 1.2rem; /* تكبير نص الكتابة التلقائية */
+            color: var(--green);
+            background: rgba(0,255,0,.05);
+            border: 1px solid rgba(57,255,20,.2);
+            border-radius: 6px;
+            padding: 1.5rem;
+            min-height: 4rem;
+            margin-bottom: 3rem;
+        }
+        .btn {
+            font-family: var(--mono);
+            font-size: 1rem;
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all .25s;
+            cursor: none;
+            display: inline-block;
+        }
+        .btn-primary { background: var(--cyan); color: #000; font-weight: 600; box-shadow: var(--glow-c); margin-right: 1rem; }
+        .btn-outline { border: 1px solid var(--amber); color: var(--amber); }
 
-  /* ── PIC ── */
-  .pic-frame { position: relative; width: 300px; height: 300px; }
-  .pic-hex { width: 100%; height: 100%; clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%); overflow: hidden; position: relative; z-index: 2; }
-  .pic-hex img { width: 100%; height: 100%; object-fit: cover; }
-  .pic-ring { position: absolute; inset: -15px; clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%); border: 3px solid var(--cyan); animation: spin-ring 8s linear infinite; }
+        /* ── SECTIONS ── */
+        section { max-width: 1200px; margin: 0 auto; padding: 8rem 2rem; }
+        .section-label { font-family: var(--mono); font-size: 1rem; color: var(--cyan); letter-spacing: .3em; margin-bottom: 1rem; }
+        .section-title { font-family: var(--display); font-size: clamp(2.5rem, 5vw, 3.8rem); color: #fff; margin-bottom: 2rem; }
 
-  /* ── SECTION BASE ── */
-  section { max-width: 1200px; margin: 0 auto; padding: 7rem 2rem; }
-  .section-label { font-family: var(--mono); font-size: 0.85rem; color: var(--cyan); letter-spacing: .3em; margin-bottom: 0.8rem; }
-  .section-title { font-family: var(--display); font-size: clamp(2.2rem, 4vw, 3.2rem); color: #fff; margin-bottom: 0.5rem; }
+        /* ── CONTACT ── */
+        .contact-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .contact-link {
+            text-decoration: none;
+            color: var(--text);
+            font-family: var(--mono);
+            font-size: 1.1rem;
+            padding: 1.2rem 2rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            background: var(--bg2);
+        }
+        .contact-link i {
+            font-size: 1.5rem; /* حجم الأيقونات الرسمية */
+            color: var(--cyan);
+        }
+        .contact-link:hover {
+            border-color: var(--cyan);
+            transform: translateY(-5px);
+            box-shadow: var(--glow-c);
+            color: #fff;
+        }
 
-  /* ── ABOUT & STATS ── */
-  .about-text p { margin-bottom: 1.5rem; font-size: 1.1rem; }
-  .stat-num { font-family: var(--mono); font-size: 2.3rem; color: var(--amber); }
-  .stat-label { font-size: 0.85rem; }
+        /* ── FOOTER ── */
+        footer {
+            padding: 3rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            font-family: var(--mono);
+            font-size: 1rem;
+            color: var(--muted);
+        }
 
-  /* ── SKILLS ── */
-  #skills { background: var(--bg2); max-width: 100%; }
-  .skill-card h3 { font-size: 0.9rem; margin-bottom: 1.2rem; }
-  .skill-card li { font-size: 1rem; padding: 0.4rem 0; }
-
-  /* ── EXPERIENCE ── */
-  .job-title { font-size: 1.5rem; }
-  .job p { font-size: 1.05rem; }
-  .job li { font-size: 1rem; }
-
-  /* ── CONTACT ── */
-  #contact { background: var(--bg); border-top: 1px solid var(--border); max-width: 100%; }
-  .contact-link {
-    font-size: 1rem;
-    padding: 1rem 1.8rem;
-    gap: 0.8rem;
-  }
-  .contact-link i { font-size: 1.3rem; width: 20px; text-align: center; }
-  .contact-link.linkedin:hover { color: #0077b5; border-color: #0077b5; }
-  .contact-link.github:hover { color: #fff; border-color: #fff; }
-  .contact-link.email:hover { color: #ea4335; border-color: #ea4335; }
-
-  /* ── ANIMATIONS ── */
-  @keyframes spin-ring { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-  .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  @media(max-width: 768px) {
-    .hero-inner { grid-template-columns: 1fr; text-align: center; }
-    .nav-links { display: none; }
-  }
-</style>
+        @media(max-width: 768px) {
+            .hero-inner { grid-template-columns: 1fr; text-align: center; }
+            .nav-links { display: none; }
+            .hero-tagline { border-left: none; padding-left: 0; }
+        }
+    </style>
 </head>
 <body>
 
@@ -221,151 +227,104 @@
 <div id="cursor-ring"></div>
 
 <nav>
-  <div class="nav-logo">[<span>Ilyes</span>]<span style="color:var(--muted)">_CHELLAT</span></div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+    <div class="nav-logo">[<span>Ilyes</span>]<span style="color:var(--muted)">_CHELLAT</span></div>
+    <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
 </nav>
 
 <div class="wrapper">
+    <section id="hero">
+        <div class="hero-inner">
+            <div class="hero-text">
+                <p class="hero-pre">// Cybersecurity & Digital Creative</p>
+                <h1 class="hero-name">Ilyes <em>CHELLAT</em></h1>
+                <p class="hero-tagline">Protecting infrastructure. <span>Designing the future.</span></p>
+                <div id="typed-text"><span id="type-output"></span><span id="cursor-blink"></span></div>
+                <div class="hero-btns">
+                    <a href="#contact" class="btn btn-primary">Hire Me</a>
+                    <a href="https://github.com/IlyesCHELLAT/IlyesCHELLAT.github.io" target="_blank" class="btn btn-outline">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section id="hero">
-  <div class="hero-inner">
-    <div class="hero-text">
-      <p class="hero-pre">// Cybersecurity & Digital Creative</p>
-      <h1 class="hero-name">Ilyes <em>CHELLAT</em></h1>
-      <p class="hero-tagline">Protecting infrastructure. <span>Designing the future.</span></p>
-      <div id="typed-text"><span id="type-output"></span><span id="cursor-blink"></span></div>
-      <div class="hero-btns">
-        <a href="#projects" class="btn btn-primary">My Work</a>
-        <a href="#contact" class="btn btn-outline">Let's Talk</a>
-      </div>
-    </div>
-    <div class="hero-pic">
-      <div class="pic-frame">
-        <div class="pic-hex"><img src="profile.png" alt="Ilyes CHELLAT"/></div>
-        <div class="pic-ring"></div>
-        <div class="pic-badge">🛡️</div>
-      </div>
-    </div>
-  </div>
-</section>
+    <section id="contact">
+        <p class="section-label">// 03. Channels</p>
+        <h2 class="section-title">Official <em>Contacts</em></h2>
+        
+        <div class="contact-grid">
+            <a href="https://www.linkedin.com/in/ilyes-chellat-5b079324a?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="contact-link">
+                <i class="fab fa-linkedin"></i>
+                <span>LinkedIn Profile</span>
+            </a>
 
-<section id="about">
-  <p class="section-label">// 01. Profile</p>
-  <h2 class="section-title">About <em>Me</em></h2>
-  <div class="divider"></div>
-  <div class="about-grid reveal">
-    <div class="about-text">
-      <p>I am <strong>Ilyes CHELLAT</strong>, a dedicated Cybersecurity student with a dual passion for technical systems and creative design. I combine the analytical mindset of a security professional with the artistic eye of a content creator.</p>
-      <p>I specialize in network security, system hardening, and professional media management, having overseen 15+ commercial digital platforms.</p>
-    </div>
-    <div class="about-stats">
-      <div class="stat-card"><span class="stat-num">15+</span><span class="stat-label">Brands Managed</span></div>
-      <div class="stat-card"><span class="stat-num">3</span><span class="stat-label">Languages Spoken</span></div>
-    </div>
-  </div>
-</section>
+            <a href="https://github.com/IlyesCHELLAT/IlyesCHELLAT.github.io" target="_blank" class="contact-link">
+                <i class="fab fa-github"></i>
+                <span>GitHub Repository</span>
+            </a>
 
-<section id="skills">
-  <div class="inner">
-    <p class="section-label">// 02. Expertise</p>
-    <h2 class="section-title">Core <em>Skills</em></h2>
-    <div class="skills-grid reveal">
-      <div class="skill-card"><h3>🔐 Cybersecurity</h3>
-        <ul><li>Network Protocols</li><li>Security by Design</li><li>Linux/Windows Admin</li></ul>
-      </div>
-      <div class="skill-card"><h3>🎨 Creative</h3>
-        <ul><li>Video Montage</li><li>Branding Design</li><li>Media Strategy</li></ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="inner" style="max-width:800px; margin:0 auto; text-align:center;">
-    <p class="section-label">// 07. Connect</p>
-    <h2 class="section-title">Get in <em>Touch</em></h2>
-    <p style="margin-bottom: 3rem;">Ready to collaborate or talk security?</p>
-    
-    <div class="contact-links reveal" style="display:flex; flex-wrap:wrap; justify-content:center; gap:1.5rem;">
-      <a href="https://www.linkedin.com/in/ilyes-chellat-5b079324a?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="contact-link linkedin" style="display:flex; align-items:center; text-decoration:none; color:var(--text); border:1px solid var(--border); border-radius:8px;">
-        <i class="fab fa-linkedin-in"></i> LinkedIn
-      </a>
-      
-      <a href="https://github.com/IlyesCHELLAT/IlyesCHELLAT.github.io" target="_blank" class="contact-link github" style="display:flex; align-items:center; text-decoration:none; color:var(--text); border:1px solid var(--border); border-radius:8px;">
-        <i class="fab fa-github"></i> GitHub
-      </a>
-      
-      <a href="mailto:ilyeschellat31@gmail.com" class="contact-link email" style="display:flex; align-items:center; text-decoration:none; color:var(--text); border:1px solid var(--border); border-radius:8px;">
-        <i class="fas fa-envelope"></i> ilyeschellat31@gmail.com
-      </a>
-    </div>
-  </div>
-</section>
-
+            <a href="mailto:ilyeschellat31@gmail.com" class="contact-link">
+                <i class="fas fa-envelope"></i>
+                <span>ilyeschellat31@gmail.com</span>
+            </a>
+        </div>
+    </section>
 </div>
 
-<footer style="padding:2rem; text-align:center; border-top:1px solid var(--border); font-family:var(--mono); font-size:0.8rem;">
-  &copy; 2026 Ilyes CHELLAT | Secured & Designed by Me.
+<footer>
+    &copy; 2026 Ilyes CHELLAT | Secured & Designed by Me.
 </footer>
 
 <script>
-/* MATRIX */
-(function(){
-  const canvas = document.getElementById('matrix-canvas');
-  const ctx = canvas.getContext('2d');
-  let cols, drops;
-  function init(){
-    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    cols = Math.floor(canvas.width / 20); drops = Array(cols).fill(1);
-  }
-  function draw(){
-    ctx.fillStyle = 'rgba(8,12,16,0.05)'; ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle = '#00e5ff'; ctx.font = '15px monospace';
-    drops.forEach((y,i)=>{
-      const text = String.fromCharCode(Math.random() * 128);
-      ctx.fillText(text, i*20, y*20);
-      if(y*20 > canvas.height && Math.random() > 0.975) drops[i] = 0;
-      drops[i]++;
+    /* MATRIX ANIMATION */
+    (function(){
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+        let cols, drops;
+        function init(){
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            cols = Math.floor(canvas.width / 20); drops = Array(cols).fill(1);
+        }
+        function draw(){
+            ctx.fillStyle = 'rgba(8,12,16,0.05)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+            ctx.fillStyle = '#00e5ff'; ctx.font = '15px monospace';
+            drops.forEach((y,i)=>{
+                const text = String.fromCharCode(Math.random() * 128);
+                ctx.fillText(text, i*20, y*20);
+                if(y*20 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            });
+        }
+        window.addEventListener('resize', init);
+        init(); setInterval(draw, 50);
+    })();
+
+    /* CUSTOM CURSOR */
+    document.addEventListener('mousemove', e => {
+        const c = document.getElementById('cursor'), r = document.getElementById('cursor-ring');
+        c.style.left = e.clientX+'px'; c.style.top = e.clientY+'px';
+        setTimeout(()=>{ r.style.left = e.clientX+'px'; r.style.top = e.clientY+'px'; }, 80);
     });
-  }
-  init(); setInterval(draw, 50);
-})();
 
-/* CURSOR */
-document.addEventListener('mousemove', e => {
-  const c = document.getElementById('cursor'), r = document.getElementById('cursor-ring');
-  c.style.left = e.clientX+'px'; c.style.top = e.clientY+'px';
-  setTimeout(()=>{ r.style.left = e.clientX+'px'; r.style.top = e.clientY+'px'; }, 80);
-});
-
-/* TYPING */
-const lines = ["Cybersecurity Analyst.", "Digital Media Strategist.", "Linux System Admin.", "Creative Designer."];
-let l=0, c=0, d=false;
-function type(){
-  const target = document.getElementById('type-output');
-  const text = lines[l];
-  if(!d){
-    target.textContent = text.slice(0, ++c);
-    if(c === text.length){ d=true; setTimeout(type, 2000); return; }
-  } else {
-    target.textContent = text.slice(0, --c);
-    if(c === 0){ d=false; l = (l+1)%lines.length; }
-  }
-  setTimeout(type, d ? 40 : 80);
-}
-type();
-
-/* REVEAL */
-const observer = new IntersectionObserver(ents => {
-  ents.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    /* TYPING EFFECT */
+    const lines = ["Cybersecurity Expert.", "Digital Content Creator.", "System Hardening Enthusiast."];
+    let l=0, c=0, d=false;
+    function type(){
+        const target = document.getElementById('type-output');
+        const text = lines[l];
+        if(!d){
+            target.textContent = text.slice(0, ++c);
+            if(c === text.length){ d=true; setTimeout(type, 2000); return; }
+        } else {
+            target.textContent = text.slice(0, --c);
+            if(c === 0){ d=false; l = (l+1)%lines.length; }
+        }
+        setTimeout(type, d ? 40 : 80);
+    }
+    type();
 </script>
 
 </body>
