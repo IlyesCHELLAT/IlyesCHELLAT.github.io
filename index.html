@@ -5,65 +5,81 @@
 <title>Ilyes | Cyber Security</title>
 
 <style>
+
 body {
   margin: 0;
-  font-family: Arial;
-  background: #0a0f1c;
-  color: white;
+  font-family: 'Segoe UI';
+  background: #05080f;
+  color: #e0f7ff;
 }
 
-/* Container */
+/* Layout */
 .container {
-  padding: 40px;
   display: grid;
-  gap: 25px;
+  grid-template-columns: 250px 1fr;
+  height: 100vh;
 }
 
-/* Glass Card */
-.card {
-  background: rgba(255,255,255,0.05);
-  border-radius: 20px;
+/* Sidebar */
+.sidebar {
+  background: #070d18;
   padding: 20px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 20px rgba(0,255,255,0.1);
-  transition: 0.3s;
+  border-right: 1px solid rgba(0,255,255,0.1);
 }
 
-.card:hover {
-  box-shadow: 0 0 30px #00f5ff;
-  transform: translateY(-5px);
-}
-
-/* Profile */
 .profile {
   text-align: center;
 }
 
 .profile img {
-  width: 140px;
+  width: 100px;
   border-radius: 50%;
-  border: 2px solid #00f5ff;
-  box-shadow: 0 0 25px #00f5ff, 0 0 50px #00f5ff;
+  box-shadow: 0 0 20px #00f5ff;
 }
 
-/* Neon Text */
-h1 {
+.profile h2 {
+  margin-top: 10px;
   color: #00f5ff;
-  text-shadow: 0 0 10px #00f5ff;
 }
 
-h2 {
+/* Menu */
+.menu {
+  margin-top: 30px;
+}
+
+.menu div {
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.menu div:hover {
+  background: rgba(0,255,255,0.1);
+}
+
+/* Main */
+.main {
+  padding: 30px;
+}
+
+/* Section */
+.section {
+  margin-bottom: 30px;
+}
+
+.section h1 {
   color: #00ff9f;
-  text-shadow: 0 0 8px #00ff9f;
+  text-shadow: 0 0 10px #00ff9f;
 }
 
 /* Skills */
 .skill {
-  margin-bottom: 15px;
+  margin-top: 10px;
 }
 
 .bar {
-  height: 8px;
+  height: 6px;
   background: rgba(255,255,255,0.1);
   border-radius: 10px;
   overflow: hidden;
@@ -71,102 +87,109 @@ h2 {
 
 .bar div {
   height: 100%;
-  background: linear-gradient(90deg, #00f5ff, #00ff9f);
+  background: linear-gradient(90deg,#00f5ff,#00ff9f);
   box-shadow: 0 0 10px #00f5ff;
 }
 
 /* Projects */
 .project {
-  margin-top: 10px;
   padding: 15px;
-  border-radius: 15px;
+  margin-top: 10px;
   background: rgba(0,255,255,0.05);
-  transition: 0.3s;
+  border-radius: 10px;
 }
 
 .project:hover {
   background: rgba(0,255,255,0.15);
-  box-shadow: 0 0 15px #00f5ff;
 }
 
-/* Button */
-.btn {
-  display: inline-block;
-  padding: 10px 15px;
-  margin-top: 10px;
-  border-radius: 10px;
-  background: #00f5ff;
-  color: black;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 0 10px #00f5ff;
+/* Top bar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
+
 </style>
 
 </head>
+
 <body>
 
 <div class="container">
 
-  <!-- Profile -->
-  <div class="card profile">
-    <img src="profile.png">
-    <h1>Ilyes Chellat</h1>
-    <p>Cyber Security Student</p>
-  </div>
+  <!-- Sidebar -->
+  <div class="sidebar">
 
-  <!-- About -->
-  <div class="card">
-    <h2>About</h2>
-    <p>Focused on cybersecurity, network defense, and threat analysis.</p>
-  </div>
-
-  <!-- Skills -->
-  <div class="card">
-    <h2>Skills</h2>
-
-    <div class="skill">
-      <span>Arabic (Native)</span>
-      <div class="bar"><div style="width:100%"></div></div>
+    <div class="profile">
+      <img src="profile.png">
+      <h2>Ilyes</h2>
+      <p>Cyber Security</p>
     </div>
 
-    <div class="skill">
-      <span>English (Very Good)</span>
-      <div class="bar"><div style="width:85%"></div></div>
-    </div>
-
-    <div class="skill">
-      <span>French (Good)</span>
-      <div class="bar"><div style="width:70%"></div></div>
-    </div>
-
-    <div class="skill">
-      <span>Python</span>
-      <div class="bar"><div style="width:75%"></div></div>
+    <div class="menu">
+      <div>Dashboard</div>
+      <div>Skills</div>
+      <div>Projects</div>
+      <div>Contact</div>
     </div>
 
   </div>
 
-  <!-- Projects -->
-  <div class="card">
-    <h2>Projects</h2>
+  <!-- Main -->
+  <div class="main">
 
-    <div class="project">
-      <h3>SIEM Dashboard</h3>
-      <p>Monitoring network activity in real time</p>
+    <div class="topbar">
+      <h2>Cyber Dashboard</h2>
+      <span>Online</span>
     </div>
 
-    <div class="project">
-      <h3>Network Scanner</h3>
-      <p>Python tool for detecting active devices</p>
+    <!-- About -->
+    <div class="section">
+      <h1>About</h1>
+      <p>Focused on cybersecurity, threat detection and network monitoring.</p>
     </div>
 
-  </div>
+    <!-- Skills -->
+    <div class="section">
+      <h1>Skills</h1>
 
-  <!-- Contact -->
-  <div class="card">
-    <h2>Contact</h2>
-    <a href="https://github.com/yourusername" class="btn">GitHub</a>
+      <div class="skill">
+        Arabic
+        <div class="bar"><div style="width:100%"></div></div>
+      </div>
+
+      <div class="skill">
+        English
+        <div class="bar"><div style="width:85%"></div></div>
+      </div>
+
+      <div class="skill">
+        French
+        <div class="bar"><div style="width:70%"></div></div>
+      </div>
+
+      <div class="skill">
+        Python
+        <div class="bar"><div style="width:75%"></div></div>
+      </div>
+
+    </div>
+
+    <!-- Projects -->
+    <div class="section">
+      <h1>Projects</h1>
+
+      <div class="project">
+        SIEM Dashboard - monitoring system
+      </div>
+
+      <div class="project">
+        Network Scanner - Python tool
+      </div>
+
+    </div>
+
   </div>
 
 </div>
